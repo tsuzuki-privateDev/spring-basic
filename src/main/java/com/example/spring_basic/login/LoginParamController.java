@@ -1,6 +1,7 @@
 package com.example.spring_basic.login;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +23,13 @@ public class LoginParamController {
             } else {
                 return "ログインに成功しました（ID：" + id + "、PASS：" + pass + "）";
             }
+    }
+
+    @GetMapping("/loginParam2/{id}/{pass}")
+    public String loginParam2(@PathVariable String id, @PathVariable String pass) {
+        if (id.equals("") || pass.equals("")) {
+            return "ログインに失敗しました。";
+        }
+        return "ログインに成功しました（ID：" + id + "、PASS：" + pass + "）";
     }
 }
