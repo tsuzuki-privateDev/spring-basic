@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginParamController {
     @GetMapping("/loginParam1")
-    // GETパラメータ（必須）を受け取る
+    // GETパラメータ（任意）を受け取る
     public String loginParam1(
         @RequestParam(required = false) String id, 
         @RequestParam(required =  false) String pass
