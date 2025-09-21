@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>thymeleafの色々な使い方</title>
+  </head>
+  <body>
+    <div class="contents">
+      <h2>Javaの院スタンやメソッドもそのまま使える</h2>
+      <p th:text="${new java.util.Date().toString()}"></p>
+
+      <h2>ユーティリティオブジェクト</h2>
+      <p
+        th:text="${#dates.format(new java.util.Date(), 'dd/MM/yyyy HH:mm')}"
+      ></p>
+      <p th:text="${#numbers.formatInteger(1234, 7)}"></p>
+      <p th:text="${#strings.toUpperCase('Welcome to Spring')}"></p>
+
+      <h2>パラメータへのアクセス</h2>
+      <p>
+        <span
+          th:if="${param.id != null}"
+          th:text="'id は 「' + ${param.id[0]} + '」 '"
+        ></span>
+        <span
+          th:if="${param.name != null}"
+          th:text="' name は 「' + ${param.name[0]} + '」 ですね。'"
+        ></span>
+      </p>
+
+      <h2>メッセージ式</h2>
+      <p th:text="#{howto.title}"></p>
+      <p th:text="#{howto.message}"></p>
+
+      <h2>リンク式とhref</h2>
+      <p><a th:text="別のページ" th:href="@{/other-page}"></a></p>
+      <p>
+        <a th:text="詳細ページ" th:href="@{/detail/{id}/(id=${user_id})}"></a>
+      </p>
+
+      <h2>選択オブジェクトへの変数式</h2>
+      <table th:object="${user}">
+        <tr>
+          <th>名前</th>
+          <td th:text="*{name}"></td>
+        </tr>
+        <tr>
+          <th>年齢</th>
+          <td th:text="*{age}"></td>
+        </tr>
+      </table>
+
+      <h2>リテラル置換</h2>
+      <p th:object="${user}">
+        <span th:text="|名前は *{name}、 年齢は *{age}歳です。|"></span>
+      </p>
+
+      <h2>HTMLコードの出力</h2>
+      <p th:text="${html}"></p>
+      <p th:utext="${html}"></p>
+    </div>
+  </body>
+</html>
