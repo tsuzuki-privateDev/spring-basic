@@ -1,5 +1,8 @@
 package com.example.spring_basic.thymeleaf;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,6 +19,15 @@ public class ThymeleafController {
         mav.addObject("user", user);
         // HTMLコード出力用サンプル
         mav.addObject("html","<h3>HTMLコードを出力しました。</h3>");
+        // 多項分岐用サンプル
+        mav.addObject("month", 1);
+        // 繰り返し用サンプル
+        List<User> users = new ArrayList<User>();
+        users.add(user);
+        users.add(new User("神田次郎", 20));
+        users.add(new User("神田花子", 15));
+        mav.addObject("users", users);
+
         mav.setViewName("thymeleaf/howto");
         return mav;
     }

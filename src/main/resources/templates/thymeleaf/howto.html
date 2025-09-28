@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>thymeleafの色々な使い方</title>
+    <style th:include="thymeleaf/fragment :: sample_style"></style>
   </head>
   <body>
     <div class="contents">
@@ -59,6 +60,34 @@
       <h2>HTMLコードの出力</h2>
       <p th:text="${html}"></p>
       <p th:utext="${html}"></p>
+
+      <h2>多項分岐</h2>
+      <div th:switch="${month}">
+        <p th:case="4" th:text="|${month} - 春|"></p>
+        <p th:case="7" th:text="|${month} - 夏|"></p>
+        <p th:case="10" th:text="|${month} - 秋|"></p>
+        <p th:case="1" th:text="|${month} - 冬|"></p>
+        <p th:case="*" th:text="|${month} - ？？？|"></p>
+      </div>
+
+      <h2>繰り返し (th:each)</h2>
+      <table>
+        <tr>
+          <th>名前</th>
+          <th>年齢</th>
+        </tr>
+        <tr th:each="data : ${users}" th:object="${data}">
+          <td th:text="*{name}"></td>
+          <td th:text="*{age}"></td>
+        </tr>
+      </table>
+
+      <h2>テンプレートフラグメント</h2>
+      <div th:include="thymeleaf/fragment :: sample_contents">
+        <h2>howto.html</h2>
+        <p>これは元から存在するコンテンツです。</p>
+        <p>元のサンプルメッセージ</p>
+      </div>
     </div>
   </body>
 </html>
